@@ -1,0 +1,213 @@
+/* =========================================================================
+   Translation Studio — initiatives table
+   Shared by "Latest initiatives" (My projects) and "Initiatives" (Folder
+   detail) so both stay visually identical. Reuse for any future table that
+   follows the same grid (e.g. a review table) instead of copy-pasting the
+   inline styles again.
+   All values resolve through the Clara tokens / --ts-* tokens already
+   defined in colors_and_type.css — no raw values here.
+   ========================================================================= */
+
+/* Section toolbar: title + count + spacer + search */
+.ts-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 32px;
+}
+.ts-toolbar-title {
+  margin: 0;
+  font-size: var(--type-body1-size);
+  line-height: var(--type-body1-lh);
+  font-weight: var(--type-body1b-weight);
+  letter-spacing: var(--type-body1-ls);
+  color: var(--fg-high);
+}
+.ts-toolbar-count {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-lh);
+  color: var(--fg-low);
+}
+.ts-spacer {
+  flex: 1 1 auto;
+}
+
+/* Dense search field: the Clara searchbar pattern at tool density (32px
+   instead of 40px). No new variant invented. */
+.ts-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  width: 260px;
+  padding: 0 10px;
+  background: var(--bg-default);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+.ts-search-icon {
+  display: block;
+  flex: 0 0 auto;
+}
+.ts-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  letter-spacing: var(--type-body2-ls);
+  color: var(--fg-high);
+}
+
+/* Table. Grid + ARIA roles rather than <sc-raw-table>: columns must stay
+   aligned while rows carry buttons and hover state. */
+.ts-tbl {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.ts-tbl-head {
+  display: grid;
+  grid-template-columns: var(--ts-cols);
+  align-items: center;
+  height: var(--ts-head-h);
+  padding: 0 var(--space-8);
+  margin: 0 calc(-1 * var(--space-8));
+  border-bottom: 1px solid var(--border-default);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-lh);
+  font-weight: 600;
+  color: var(--fg-high);
+}
+.ts-sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.ts-sort-btn:hover {
+  color: var(--primary-default);
+}
+.ts-sort-icon {
+  display: block;
+  flex: 0 0 auto;
+}
+.ts-col-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ts-col-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Row height stays dynamic (density prop drives {{ rowH }} inline), only
+   the static grid/border/hover rules live here. */
+.ts-tbl-row {
+  display: grid;
+  grid-template-columns: var(--ts-cols);
+  align-items: center;
+  min-height: var(--ts-row-h);
+  padding: 0 var(--space-8);
+  margin: 0 calc(-1 * var(--space-8));
+  border-bottom: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+}
+.ts-tbl-row:hover {
+  background: var(--bg-highlight);
+}
+
+.ts-cell-name {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  padding-right: var(--space-16);
+}
+.ts-name-link {
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  font-weight: var(--type-body2b-weight);
+  letter-spacing: var(--type-body2-ls);
+  color: var(--fg-high);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ts-project-label {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-lh);
+  color: var(--fg-low);
+  white-space: nowrap;
+}
+.ts-cell-num {
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  letter-spacing: var(--type-body2-ls);
+  color: var(--fg-medium);
+  font-variant-numeric: tabular-nums;
+}
+.ts-cell-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.ts-cell-csv {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+.ts-download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  font-weight: 500;
+  letter-spacing: var(--type-body2-ls);
+  color: var(--comp-link);
+}
+.ts-download-blocked {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  font-weight: 500;
+  letter-spacing: var(--type-body2-ls);
+  color: var(--fg-disabled);
+  cursor: not-allowed;
+}
+.ts-download-icon {
+  display: block;
+}
+.ts-tooltip {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% - 2px);
+  z-index: 5;
+  white-space: nowrap;
+  background: var(--sidenav-bg);
+  color: var(--on-primary-high);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-centered-low);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-lh);
+}
+.ts-empty-message {
+  margin: 0;
+  padding: var(--space-32) 0;
+  text-align: center;
+  font-size: var(--type-body2-size);
+  line-height: var(--type-body2-lh);
+  color: var(--fg-low);
+}
